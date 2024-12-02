@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Check Git Installation') {
+        stage('Run a Windows Command') {
             steps {
-                sh 'git --version' // Use bat 'git --version' for Windows
+                bat 'dir'  // Example of a Windows command
             }
         }
     }
