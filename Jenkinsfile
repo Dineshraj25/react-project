@@ -1,9 +1,27 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'NodeJS 16.13.1' // Replace with your configured Node.js name in Jenkins
+    }
     stages {
-        stage('Run a Windows Command') {
+        stage('Checkout Code') {
             steps {
-                bat 'dir'  // Example of a Windows command
+                git 'https://github.com/Dineshraj25/react-project.git' 
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage('Build React App') {
+            steps {
+                bat 'npm run build'
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build\\**', fingerprint: true
             }
         }
     }
