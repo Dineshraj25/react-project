@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarqube-token' with your credential ID
+        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarQube-token' with your credential ID
     }
 
     stages {
@@ -29,13 +29,13 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') { // Ensure 'SonarQube' matches the Jenkins SonarQube configuration name
-                    bat '''
-                    sonar-scanner.bat \
-                      -Dsonar.projectKey=react-project \
-                      -Dsonar.sources=src \
-                      -Dsonar.host.url=%SONAR_HOST_URL% \
+                    bat """
+                    sonar-scanner.bat ^
+                      -Dsonar.projectKey=react-project ^
+                      -Dsonar.sources=src ^
+                      -Dsonar.host.url=%SONAR_HOST_URL% ^
                       -Dsonar.login=%SONAR_TOKEN%
-                    '''
+                    """
                 }
             }
         }
