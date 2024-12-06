@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         SONAR_HOST_URL = 'http://localhost:9000' // Adjust the URL if needed
-        SONAR_TOKEN = credentials('sonarqube-token') // Replace 'sonarqube-token' with your actual Jenkins credential ID
+        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarqube-token' with your actual Jenkins credential ID
     }
 
     stages {
