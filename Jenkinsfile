@@ -2,18 +2,18 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Make sure to configure NodeJS in Jenkins Global Tool Configuration
+        nodejs 'NodeJS' // Replace with your configured NodeJS installation name
     }
 
     environment {
-        SONAR_HOST_URL = 'http://localhost:9000' // Adjust the URL if needed
-        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarqube-token' with your actual Jenkins credential ID
+        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_TOKEN = credentials('sonarqube-token') // Replace 'sonarqube-token' with your credential ID
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/Dineshraj25/react-project.git' 
+                git 'https://github.com/Dineshraj25/react-project.git'
             }
         }
         stage('Install Dependencies') {
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // 'SonarQube' matches the name in Jenkins SonarQube server configuration
+                withSonarQubeEnv('SonarQube') { // Ensure 'SonarQube' matches the Jenkins SonarQube configuration name
                     bat '''
                     sonar-scanner.bat \
                       -Dsonar.projectKey=react-project \
