@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_TOKEN = credentials('sonarqube-token') // Replace 'sonarqube-token' with your credential ID
+        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarqube-token' with your credential ID
     }
 
     stages {
