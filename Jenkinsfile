@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS' // Replace with your configured NodeJS installation name
-    }
-
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarQube-token' with your credential ID
