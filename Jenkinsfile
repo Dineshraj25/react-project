@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Deploy to Netlify') {
             steps {
-                bat 'netlify deploy --dir build --prod --auth <your-auth-token>'
+                bat 'netlify deploy --dir build --prod --auth <nfp_1touJS6kSk4BMV9tGoUdU5qouSu9xtmwe4fb>'
             }
         }
     }
