@@ -4,6 +4,7 @@ pipeline {
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_TOKEN = credentials('sonarQube-token') // Replace with your credential ID
+        NETLIFY_AUTH = credentials('netlify-auth-token')
     }
 
     stages {
@@ -29,7 +30,10 @@ pipeline {
         }
         stage('Deploy to Netlify') {
             steps {
-                bat 'netlify deploy --dir build --prod --auth <nfp_1touJS6kSk4BMV9tGoUdU5qouSu9xtmwe4fb>'
+
+                bat 'netlify deploy --dir build --prod --auth %NETLIFY_AUTH%'
+
+
             }
         }
     }
