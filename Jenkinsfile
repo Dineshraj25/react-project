@@ -54,7 +54,7 @@ pipeline {
                 script {
                     // Deploy the build directory to Netlify
                     bat """
-                    npx netlify deploy --dir build --prod --auth $env.NETLIFY_AUTH_TOKEN
+                    npm netlify deploy --dir build --prod --auth $env.NETLIFY_AUTH_TOKEN
                     """
                 }
             }
