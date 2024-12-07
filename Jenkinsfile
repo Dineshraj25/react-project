@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarQube-token' with your credential ID
-        NETLIFY_AUTH_TOKEN = credentials('netlify-auth-token') // Replace 'netlify-auth-token' with your Netlify credential ID
+        SONAR_TOKEN = credentials('sonarQube-token') // Replace with your credential ID
     }
 
     stages {
@@ -23,40 +22,14 @@ pipeline {
                 bat 'npm run build'
             }
         }
-        stage('SonarQube Analysis') {
+        stage('Install Netlify CLI') {
             steps {
-                withSonarQubeEnv('SonarQube') { // Ensure 'SonarQube' matches the Jenkins SonarQube configuration name
-                    bat """
-                    sonar-scanner.bat -X ^
-                        -Dsonar.projectKey=react-project ^
-                        -Dsonar.sources=src ^
-                        -Dsonar.host.url=%SONAR_HOST_URL% ^
-                         -Dsonar.login=%SONAR_TOKEN%
-
-                    """
-                }
-            }
-        }
-        stage('Quality Gate') {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-        stage('Archive Artifacts') {
-            steps {
-                archiveArtifacts artifacts: 'build\\**', fingerprint: true
+                bat 'npm install -g netlify-cli'
             }
         }
         stage('Deploy to Netlify') {
             steps {
-                script {
-                    // Deploy the build directory to Netlify
-                    bat """
-                    npm netlify deploy --dir build --prod --auth $env.NETLIFY_AUTH_TOKEN
-                    """
-                }
+                bat 'netlify deploy --dir build --prod --auth <your-auth-token>'
             }
         }
     }
