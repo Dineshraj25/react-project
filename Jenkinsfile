@@ -27,11 +27,12 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') { // Ensure 'SonarQube' matches the Jenkins SonarQube configuration name
                     bat """
-                    sonar-scanner.bat ^ 
-                      -Dsonar.projectKey=react-project ^ 
-                      -Dsonar.sources=src ^ 
-                      -Dsonar.host.url=%SONAR_HOST_URL% ^ 
-                      -Dsonar.login=%SONAR_TOKEN%
+                    sonar-scanner.bat -X ^
+                        -Dsonar.projectKey=react-project ^
+                        -Dsonar.sources=src ^
+                        -Dsonar.host.url=%SONAR_HOST_URL% ^
+                         -Dsonar.login=%SONAR_TOKEN%
+
                     """
                 }
             }
