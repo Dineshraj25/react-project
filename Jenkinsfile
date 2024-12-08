@@ -16,7 +16,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
-            
             }
         }
         stage('Build React App') {
@@ -31,7 +30,9 @@ pipeline {
         }
         stage('Deploy to Netlify') {
             steps {
-                bat 'npx netlify deploy --dir build --prod --auth %NETLIFY_AUTH%'
+                bat """
+                npx netlify deploy --dir build --prod --auth %NETLIFY_AUTH% --site 557661fc-8743-4041-a2b0-3a792ea14e01
+                """
             }
         }
     }
