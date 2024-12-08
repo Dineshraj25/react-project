@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_TOKEN = credentials('sonarQube-token') // Replace with your credential ID
-        NETLIFY_AUTH = credentials('netlify-auth-token')
+        SONAR_TOKEN = credentials('sonarQube-token') // Replace 'sonarQube-token' with your credential ID
+        NETLIFY_AUTH = credentials('netlify-auth-token') // Replace 'netlify-auth-token' with your credential ID
     }
 
     stages {
@@ -23,17 +23,14 @@ pipeline {
                 bat 'npm run build'
             }
         }
-        stage('Install Netlify CLI') {
+        stage('Check Build Directory') {
             steps {
-                bat 'npm install -g netlify-cli'
+                bat 'dir build'
             }
         }
         stage('Deploy to Netlify') {
             steps {
-
-                bat 'netlify deploy --dir build --prod --auth %NETLIFY_AUTH%'
-
-
+                bat 'npx netlify deploy --dir build --prod --auth %NETLIFY_AUTH%'
             }
         }
     }
