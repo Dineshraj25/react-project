@@ -16,6 +16,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
+                reuseNode true
             }
         }
         stage('Build React App') {
